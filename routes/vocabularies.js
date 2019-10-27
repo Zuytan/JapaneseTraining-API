@@ -15,13 +15,13 @@ router.get("/", function(req, res, next) {
   });
 });
 
-router.get("/lesson/get", function(req, res, next) {
-  const { lessonId } = req;
-  Lesson.find({ id: lessonId }, (err, lessons) => {
-    if (err) {
+router.post("/lesson/get", function(req, res, next) {
+  const { lessonId } = req.body;
+  console.log(lessonId);
+  Lesson.findById(lessonId, (err, lessonFound) => {
+    if (err || !lessonFound) {
       res.status(404).json({ error: "error.lesson.notFound" });
     } else {
-      const lessonFound = lessons[0];
       const lesson = {
         id: lessonFound._id,
         name: lessonFound.name,

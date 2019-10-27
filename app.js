@@ -2,6 +2,7 @@
 var express = require("express");
 var cookieParser = require("cookie-parser");
 var logger = require("morgan");
+var cors = require("cors");
 
 //DB imports
 var { DB_URL, DB_OPTIONS } = require("./config/db");
@@ -16,6 +17,7 @@ app.use(logger("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
+app.use(cors());
 
 //DB config
 mongoose.connect(DB_URL, DB_OPTIONS);
